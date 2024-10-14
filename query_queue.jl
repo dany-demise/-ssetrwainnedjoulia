@@ -1,4 +1,4 @@
-module AsyncQueue
+module QueryQueue
 
 # Create an unbounded channel to represent the queue
 const queue = Channel{Any}()
