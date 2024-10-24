@@ -1,16 +1,15 @@
+module AsyncServer
+
 #3rd party and standard imports
-import HTTP
+using HTTP
 
 #Local imports
-include("query_queue.jl")
+include("./query_queue.jl")
 import .QueryQueue
-
-module AsyncServer
 
 # Middleware function
 function logging_middleware(handler)
     return (req::HTTP.Request) -> begin
-        QueryQueue.push!("ok !")
         # Log the incoming request
         println("Received request: $(req.method) $(req.target)")
 
@@ -24,6 +23,7 @@ end
 
 # Main request handler
 function request_handler(req::HTTP.Request)
+     QueryQueue.push!("ok !")
     if req.method == "GET"
         return HTTP.Response(200, "Helxlo, World!")
     else
@@ -40,4 +40,4 @@ function start_server(port::Int)
     HTTP.serve(app, "0.0.0.0", port)
 end
 
-end
+end # module
