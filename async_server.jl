@@ -1,11 +1,11 @@
+#3rd party and standard imports
+import HTTP
 
-
+#Local imports
+include("query_queue.jl")
+import .QueryQueue
 
 module AsyncServer
-using HTTP
-include("query_queue.jl")
-using .QueryQueue
-
 
 # Middleware function
 function logging_middleware(handler)
