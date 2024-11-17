@@ -24,6 +24,11 @@ end
 # Main request handler
 function request_handler(req::HTTP.Request)
      QueryQueue.push!("ok !")
+     println("hi ")
+     for i in 1:10
+        sleep(0.05)
+        println("hi ", i)
+    end
     if req.method == "GET"
         return HTTP.Response(200, "Helxlo, World!")
     else
